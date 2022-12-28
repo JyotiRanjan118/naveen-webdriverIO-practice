@@ -4,8 +4,7 @@
   "description": "this is webdriverIO script",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "wdio": "wdio run test/wdio.conf.ts"
+    "demo": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@demo'"
   },
   "author": "Jyoti Nath",
   "license": "ISC",
@@ -18,6 +17,7 @@
     "chai": "^4.3.7",
     "chromedriver": "^107.0.3",
     "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.1",
     "typescript": "^4.9.3",
     "wdio-chromedriver-service": "^8.0.0",
     "webdriverio": "^7.27.0"
