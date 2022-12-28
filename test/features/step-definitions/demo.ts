@@ -26,3 +26,8 @@ Then(/^URL should match (.*)$/, async function (expectedURL) {
   let url = await browser.getUrl();
   chai.expect(url).to.equal(expectedURL);
 });
+
+/**
+ * Web Interactions
+ *
+ */
