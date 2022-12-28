@@ -1,6 +1,6 @@
 Feature: Web Interactions
 
-    @demo
+    #@demo
     Scenario Outline: Demo Web Interactions
     Given Login to inventory web app
     Then Inventory page should list <NumberOfProducts>
