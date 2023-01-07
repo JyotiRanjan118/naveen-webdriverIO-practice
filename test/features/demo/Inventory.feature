@@ -1,10 +1,10 @@
 Feature: Web Interactions
 
-    #@demo
+    @demo @smoke
     Scenario Outline: Demo Web Interactions
     Given Login to inventory web app
     Then Inventory page should list <NumberOfProducts>
-    Then Validate all products have valid price 
+    Then Validate all products have valid price
 
 
     Examples:

@@ -157,7 +157,7 @@ Then(/^URL should match (.*)$/, async function (expectedURL) {
 // });
 
 When(/^Perform web interactions$/, async function () {
-  await browser.url("/inputs");
+  await browser.url("/dropdown");
   await browser.setTimeout({ implicit: 15000, pageLoad: 10000 });
   await browser.maximizeWindow();
   /*
@@ -169,20 +169,51 @@ When(/^Perform web interactions$/, async function () {
    * 4. Slow typing
    *
    */
-  let num = "12345";
-  let strNum = num.toString();
-  let ele = await $(`[type='number']`);
-  //await ele.setValue(strNum);
+  // let num = "12345";
+  // let strNum = num.toString();
+  // let ele = await $(`'[type='number']'`);
+  // //await ele.setValue(strNum);
 
-  //Slow typing
-  ele.click();
-  for (let i = 0; i < strNum.length; i++) {
-    let charAt = strNum.charAt(i);
-    await browser.pause(1000);
-    await browser.keys(charAt);
+  // //Slow typing
+  // await browser.debug();
+  // ele.click();
+  // for (let i = 0; i < strNum.length; i++) {
+  //   let charAt = strNum.charAt(i);
+  //   await browser.pause(1000);
+  //   await browser.keys(charAt);
+  // }
+
+  // await browser.pause(3000);
+
+  /**
+   * 2. dropdown
+   * Actions:
+   * 1.Assert default option is selected
+   * 2. Select by attribute ,text and index
+   * 3. Get a list options
+   *
+   */
+
+  //1.Assert default option is selected
+  let element = await $('//select/option[@selected="selected"]');
+  let val = await element.getText();
+  chai.expect(val).to.equal("Please select an option");
+  //await browser.debug();
+
+  //2. Select by attribute ,text and index
+  let ddEle = await $(".example #dropdown");
+  await ddEle.selectByIndex(2);
+
+  //3. Get a list options
+  let eleArr = await $$("select > option");
+  let arr = [];
+  for (let i = 0; i < eleArr.length; i++) {
+    const element = eleArr[i];
+    let val = await element.getText();
+    arr.push(val);
+    console.log(val);
   }
+  console.log(`>> Options array: ${arr}`);
 
-  await browser.pause(3000);
-
-  //Slow typing
+  await browser.debug();
 });

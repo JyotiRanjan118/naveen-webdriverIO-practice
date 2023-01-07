@@ -4,7 +4,8 @@
   "description": "this is webdriverIO script",
   "main": "index.js",
   "scripts": {
-    "demo": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@demo'"
+    "demo": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@demo'",
+    "smoke": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@smoke'"
   },
   "author": "Jyoti Nath",
   "license": "ISC",
