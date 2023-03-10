@@ -1,5 +1,6 @@
 import { Given, When, Then } from "@wdio/cucumber-framework";
 import chai from "chai"
+import dataDenerator from "../../../utils/data-denerator";
 const commands = require("../../../utils/commands");
 const DataGenerator = require("../../../utils/data-denerator")
 
@@ -22,7 +23,8 @@ Then(/^fill customer details and click on submit$/, async () => {
         await firstName.setValue("Joe");
         await lastName.setValue("Blogs");
         //await emailAddress.setValue("joe_blogs123@mail.com");
-        await emailAddress.setValue(DataGenerator.generateRandomString());      //Generate random string
+        await emailAddress.setValue(dataDenerator.generateRandomString()+"@gmail.com");      //Generate random string
+        await browser.pause(5000);
         await message.setValue("Hello how are you?");
 
         //await browser.debug();
