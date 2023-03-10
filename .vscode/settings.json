@@ -1,5 +1,6 @@
 {
   "cucumberautocomplete.steps": ["test/features/step-definitions/*.ts"],
+  //"cucumberautocomplete.syncfeatures": "test/features/**/*.feature",
   "cucumberautocomplete.syncfeatures": "test/features/**/*.feature",
   "editor.codeActionsOnSave": {}
 }

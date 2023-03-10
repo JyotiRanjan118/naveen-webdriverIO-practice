@@ -215,5 +215,6 @@ When(/^Perform web interactions$/, async function () {
   }
   console.log(`>> Options array: ${arr}`);
 
-  await browser.debug();
+  await browser.pause(3000);
+  //await browser.debug();
 });

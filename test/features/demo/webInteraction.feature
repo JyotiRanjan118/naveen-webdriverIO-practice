@@ -1,6 +1,6 @@
 Feature: webInteraction feature
 
-    @demo
+    #@demo
     Scenario Outline: Run web interaction feature
     #Given A web page is opened
     When Perform web interactions

@@ -1,4 +1,10 @@
 import type { Options } from "@wdio/types";
+import dotenv from "dotenv";
+dotenv.config()
+
+let headless = process.env.HEADLESS;
+let debug = process.env.DEBUG;
+console.log(`The value of headless flag is : ${headless}`);
 
 export const config: Options.Testrunner = {
   //
@@ -54,6 +60,13 @@ export const config: Options.Testrunner = {
   exclude: [
     // 'path/to/excluded/files'
   ],
+
+  suites:{
+    demo:[
+      './test/features/webDriverZeroExpert/test2.feature',
+      './test/features/demo/Inventory.feature',
+    ],
+  },
   //
   // ============
   // Capabilities
@@ -81,11 +94,29 @@ export const config: Options.Testrunner = {
       // maxInstances can get overwritten per capability. So if you have an in-house Selenium
       // grid with only 5 firefox instances available you can make sure that not more than
       // 5 instances get started at a time.
+      /**
+       * Additional chrome options
+       * --headless
+       * --disable-dev-shm-usage
+       * --no--sandbox
+       * --window-size=1920,1080
+       * --disable-gpu
+       * --proxy-server
+       */
       maxInstances: 5,
       //
       browserName: "chrome",
       "goog:chromeOptions": {
-        args: ["--disable-web-security"],
+        args:
+          headless.toUpperCase() === "Y"
+            ? [
+                "--disable-web-security",
+                "--headless",
+                "--disable-dev-shm-usage",
+                "--no--sandbox",
+                "--window-size=1920,1080",
+              ]
+            : [],
       },
       acceptInsecureCerts: true,
       // If outputDir is provided WebdriverIO can capture driver session logs
@@ -101,7 +132,7 @@ export const config: Options.Testrunner = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: "error",
+  logLevel: debug.toUpperCase() === "Y" ? 'info' : 'error',
   //
   // Set specific log levels per logger
   // loggers:
@@ -188,7 +219,7 @@ export const config: Options.Testrunner = {
     // <string> (expression) only execute the features or scenarios with tags matching the expression
     tagExpression: "",
     // <number> timeout for step definitions
-    timeout: 60000,
+    timeout: 2500000,
     // <boolean> Enable this config to treat undefined definitions as warnings.
     ignoreUndefinedDefinitions: true,
   },
