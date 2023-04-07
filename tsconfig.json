@@ -9,6 +9,7 @@
       "expect-webdriverio"
     ],
     "target": "ES2019",
-    "module": "CommonJS"
+    "module": "CommonJS",
+    "allowJs": true,  
   }
 }

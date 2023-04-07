@@ -4,22 +4,30 @@
   "description": "this is webdriverIO script",
   "main": "index.js",
   "scripts": {
-    "demo": "npx wdio wdio.conf.ts --cucumberOpts.tagExpression='@demo'"
+    "test:debug": "Set DEBUG=Y && HEADLESS=N && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo'",
+    "test:demo": "Set DEBUG=N && Set HEADLESS=N && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@demo'",
+    "test:smoke": "Set DEBUG=N && HEADLESS=Y && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@smoke'",
+    "uat:demo": "Set DEBUG=N && HEADLESS=N && npx wdio config/wdio.uat.conf.ts --cucumberOpts.tagExpression='@demo'",
+    "uat:smoke": "Set DEBUG=N && HEADLESS=Y && npx wdio config/wdio.uat.conf.ts --cucumberOpts.tagExpression='@smoke'",
+    "smoke-suite": "npx wdio --suites wdio.conf.ts",
+    "webdriverIOZeroExpert": "npx wdio --spec test/features/webDriverZeroExpert/*.features"
   },
   "author": "Jyoti Nath",
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "^4.3.4",
+    "@wdio/allure-reporter": "^8.7.0",
     "@wdio/cli": "^7.27.0",
     "@wdio/cucumber-framework": "^7.27.0",
     "@wdio/local-runner": "^7.27.0",
     "@wdio/spec-reporter": "^7.26.0",
     "chai": "^4.3.7",
-    "chromedriver": "^107.0.3",
+    "chromedriver": "^110",
+    "dotenv": "^16.0.3",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.1.1",
     "typescript": "^4.9.3",
-    "wdio-chromedriver-service": "^8.0.0",
+    "wdio-chromedriver-service": "^8.1.1",
     "webdriverio": "^7.27.0"
   }
 }

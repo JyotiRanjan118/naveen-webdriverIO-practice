@@ -1,4 +1,10 @@
 import type { Options } from "@wdio/types";
+import dotenv from "dotenv";
+dotenv.config();
+
+let headless = process.env.HEADLESS;
+let debug = process.env.DEBUG;
+console.log(`The value of headless flag is : ${headless}`);
 
 export const config: Options.Testrunner = {
   //
@@ -54,6 +60,13 @@ export const config: Options.Testrunner = {
   exclude: [
     // 'path/to/excluded/files'
   ],
+
+  suites: {
+    demo: [
+      "./test/features/webDriverZeroExpert/test2.feature",
+      "./test/features/demo/Inventory.feature",
+    ],
+  },
   //
   // ============
   // Capabilities
@@ -81,9 +94,30 @@ export const config: Options.Testrunner = {
       // maxInstances can get overwritten per capability. So if you have an in-house Selenium
       // grid with only 5 firefox instances available you can make sure that not more than
       // 5 instances get started at a time.
+      /**
+       * Additional chrome options
+       * --headless
+       * --disable-dev-shm-usage
+       * --no--sandbox
+       * --window-size=1920,1080
+       * --disable-gpu
+       * --proxy-server
+       */
       maxInstances: 5,
       //
       browserName: "chrome",
+      "goog:chromeOptions": {
+        args:
+          headless.toUpperCase() === "Y"
+            ? [
+                "--disable-web-security",
+                "--headless",
+                "--disable-dev-shm-usage",
+                "--no--sandbox",
+                "--window-size=1920,1080",
+              ]
+            : [],
+      },
       acceptInsecureCerts: true,
       // If outputDir is provided WebdriverIO can capture driver session logs
       // it is possible to configure which logTypes to include/exclude.
@@ -98,7 +132,7 @@ export const config: Options.Testrunner = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: "error",
+  logLevel: debug.toUpperCase() === "Y" ? "info" : "error",
   //
   // Set specific log levels per logger
   // loggers:
@@ -122,7 +156,8 @@ export const config: Options.Testrunner = {
   // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
   // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
   // gets prepended directly.
-  baseUrl: "http://localhost",
+  //baseUrl: "http://localhost",
+  baseUrl: "https://the-internet.herokuapp.com",
   //
   // Default timeout for all waitFor* commands.
   waitforTimeout: 10000,
@@ -160,7 +195,18 @@ export const config: Options.Testrunner = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ["spec"],
+  reporters: [
+    "spec",
+    // [
+    //   "allure",
+    //   {
+    //     outputDir: "allure-results",
+    //     disableWebdriverStepsReporting: true,
+    //     useCucumberStepReporter: true,
+    //     //disableWebdriverScreenshotsReporting: false,
+    //   }
+    // ]
+  ],
 
   //
   // If you are using Cucumber you need to specify the location of your step definitions.
@@ -182,9 +228,9 @@ export const config: Options.Testrunner = {
     // <boolean> fail if there are any undefined or pending steps
     strict: false,
     // <string> (expression) only execute the features or scenarios with tags matching the expression
-    tagExpression: "@demo",
+    tagExpression: "",
     // <number> timeout for step definitions
-    timeout: 60000,
+    timeout: 2500000,
     // <boolean> Enable this config to treat undefined definitions as warnings.
     ignoreUndefinedDefinitions: true,
   },
@@ -287,8 +333,15 @@ export const config: Options.Testrunner = {
    * @param {number}             result.duration  duration of scenario in milliseconds
    * @param {Object}             context          Cucumber World object
    */
-  // afterStep: function (step, scenario, result, context) {
-  // },
+  afterStep: async function (step, scenario, result, context) {
+    console.log(`>> step : ${JSON.stringify(step)}`);
+    console.log(`>> scenario: ${JSON.stringify(scenario)}`);
+    console.log(`>> result: ${JSON.stringify(result)}`);
+
+    if (!result.passed) {
+      await browser.takeScreenshot();
+    }
+  },
   /**
    *
    * Runs after a Cucumber Scenario.

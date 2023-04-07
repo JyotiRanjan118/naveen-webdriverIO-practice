@@ -42,115 +42,179 @@ Then(/^URL should match (.*)$/, async function (expectedURL) {
  * 5. Get single cell value based on another cell
  *
  */
-Given(/^A web page is opened$/, async function () {
-  await browser.url("https://the-internet.herokuapp.com/tables");
+// Given(/^A web page is opened$/, async function () {
+//   await browser.url("/tables");
+//   //await browser.url("");
+//   await browser.setTimeout({ implicit: 15000, pageLoad: 10000 });
+
+//   let rowCount = await $$(`//table[@id='table1']/tbody/tr`).length;
+//   chai.expect(rowCount).to.equal(4);
+//   console.log(`>> Number of rows: ${rowCount}`);
+//   let colCount = await $$(`//table[@id='table1']/thead/tr/th`).length;
+//   console.log(`>> NUmber of cols: ${colCount}`);
+//   chai.expect(colCount).to.equal(6);
+
+//   /**
+//    * Get whole table data
+//    * Check number of rows and columns
+//    * Get whole table data
+//    */
+//   // let arr = [];
+//   // for (let i = 0; i < rowCount; i++) {
+//   //   let personJob = {
+//   //     lastname: "",
+//   //     firstname: "",
+//   //     email: "",
+//   //     due: "",
+//   //     web: "",
+//   //   };
+//   //   for (let j = 0; j < colCount; j++) {
+//   //     let cellVal = await $(
+//   //       `//table[@id='table1']/tbody/tr[${i + 1}]/td[${j + 1}]`
+//   //     ).getText();
+//   //     /**
+//   //      * Assign the values to object
+//   //      */
+//   //     if (cellVal === "") {
+//   //       if (j === 0) personJob.lastname = cellVal;
+//   //       if (j === 1) personJob.firstname = cellVal;
+//   //       if (j === 2) personJob.email = cellVal;
+//   //       if (j === 3) personJob.due = cellVal;
+//   //       if (j === 4) personJob.web = cellVal;
+//   //     }
+
+//   //     //console.log(`>> Cell value: ${cellVal}`);
+//   //   }
+//   //   arr.push(personJob);
+//   // }
+//   // console.log(`Whole table: ${JSON.stringify(arr)}`);
+
+//   /**
+//    * Web table part 2
+//    * 3. get a single row based on condition
+//    *
+//    */
+//   // let arr = [];
+//   // for (let i = 0; i < rowCount; i++) {
+//   //   let personJob = {
+//   //     lastname: "",
+//   //     firstname: "",
+//   //     email: "",
+//   //     due: "",
+//   //     web: "",
+//   //   };
+//   //   for (let j = 0; j < colCount; j++) {
+//   //     let cellVal = await $(
+//   //       `//table[@id='table1']/tbody/tr[${i + 1}]/td[${j + 1}]`
+//   //     ).getText();
+//   //     let firstname = await $(
+//   //       `//table[@id='table1']/tbody/tr[${i + 1}]/td[2]`
+//   //     ).getText();
+//   //     if (firstname === "Jason") {
+//   //       if (j === 0) personJob.lastname = cellVal;
+//   //       if (j === 1) personJob.firstname = cellVal;
+//   //       if (j === 2) personJob.email = cellVal;
+//   //       if (j === 3) personJob.due = cellVal;
+//   //       if (j === 4) personJob.web = cellVal;
+//   //     }
+//   //   }
+//   //   if (personJob.firstname) {
+//   //     arr.push(personJob);
+//   //   }
+//   // }
+//   // console.log(`Whole table: ${JSON.stringify(arr)}`);
+
+//   /**
+//    * 4.Get single column
+//    */
+//   // let arr = [];
+//   // for (let i = 0; i < rowCount; i++) {
+//   //   let cellVal = await $(
+//   //     `//table[@id='table1']/tbody/tr[${i + 1}]/td[4]`
+//   //   ).getText();
+//   //   arr.push(cellVal);
+//   // }
+//   // console.log(`>> Single col value: ${arr}`);
+
+//   /**
+//    * 5. Get single cell value based on another cell
+//    */
+//   let arr = [];
+//   for (let i = 0; i < rowCount; i++) {
+//     //for (let j = 0; j < colCount; j++) {
+//     let price = await (
+//       await $(`//table[@id='table1']/tbody/tr[${i + 1}]/td[4]`)
+//     ).getText();
+//     let firstname = await (
+//       await $(`//table[@id='table1']/tbody/tr[${i + 1}]/td[2]`)
+//     ).getText();
+//     if (+price.replace("$", "") > 50) {
+//       arr.push(firstname);
+//     }
+//     //}
+//   }
+//   console.log(`>> Single col value: ${arr}`);
+// });
+
+When(/^Perform web interactions$/, async function () {
+  await browser.url("/dropdown");
   await browser.setTimeout({ implicit: 15000, pageLoad: 10000 });
-
-  let rowCount = await $$(`//table[@id='table1']/tbody/tr`).length;
-  chai.expect(rowCount).to.equal(4);
-  console.log(`>> Number of rows: ${rowCount}`);
-  let colCount = await $$(`//table[@id='table1']/thead/tr/th`).length;
-  console.log(`>> NUmber of cols: ${colCount}`);
-  chai.expect(colCount).to.equal(6);
-
-  /**
-   * Get whole table data
-   * Check number of rows and columns
-   * Get whole table data
-   */
-  // let arr = [];
-  // for (let i = 0; i < rowCount; i++) {
-  //   let personJob = {
-  //     lastname: "",
-  //     firstname: "",
-  //     email: "",
-  //     due: "",
-  //     web: "",
-  //   };
-  //   for (let j = 0; j < colCount; j++) {
-  //     let cellVal = await $(
-  //       `//table[@id='table1']/tbody/tr[${i + 1}]/td[${j + 1}]`
-  //     ).getText();
-  //     /**
-  //      * Assign the values to object
-  //      */
-  //     if (cellVal === "") {
-  //       if (j === 0) personJob.lastname = cellVal;
-  //       if (j === 1) personJob.firstname = cellVal;
-  //       if (j === 2) personJob.email = cellVal;
-  //       if (j === 3) personJob.due = cellVal;
-  //       if (j === 4) personJob.web = cellVal;
-  //     }
-
-  //     //console.log(`>> Cell value: ${cellVal}`);
-  //   }
-  //   arr.push(personJob);
-  // }
-  // console.log(`Whole table: ${JSON.stringify(arr)}`);
-
-  /**
-   * Web table part 2
-   * 3. get a single row based on condition
+  await browser.maximizeWindow();
+  /*
+   * 1. Input box
+   * Actions
+   * 1. Type into input box
+   * 2. Clear the field and type of just advalue
+   * 3. Click and type
+   * 4. Slow typing
    *
    */
-  // let arr = [];
-  // for (let i = 0; i < rowCount; i++) {
-  //   let personJob = {
-  //     lastname: "",
-  //     firstname: "",
-  //     email: "",
-  //     due: "",
-  //     web: "",
-  //   };
-  //   for (let j = 0; j < colCount; j++) {
-  //     let cellVal = await $(
-  //       `//table[@id='table1']/tbody/tr[${i + 1}]/td[${j + 1}]`
-  //     ).getText();
-  //     let firstname = await $(
-  //       `//table[@id='table1']/tbody/tr[${i + 1}]/td[2]`
-  //     ).getText();
-  //     if (firstname === "Jason") {
-  //       if (j === 0) personJob.lastname = cellVal;
-  //       if (j === 1) personJob.firstname = cellVal;
-  //       if (j === 2) personJob.email = cellVal;
-  //       if (j === 3) personJob.due = cellVal;
-  //       if (j === 4) personJob.web = cellVal;
-  //     }
-  //   }
-  //   if (personJob.firstname) {
-  //     arr.push(personJob);
-  //   }
+  // let num = "12345";
+  // let strNum = num.toString();
+  // let ele = await $(`'[type='number']'`);
+  // //await ele.setValue(strNum);
+
+  // //Slow typing
+  // await browser.debug();
+  // ele.click();
+  // for (let i = 0; i < strNum.length; i++) {
+  //   let charAt = strNum.charAt(i);
+  //   await browser.pause(1000);
+  //   await browser.keys(charAt);
   // }
-  // console.log(`Whole table: ${JSON.stringify(arr)}`);
+
+  // await browser.pause(3000);
 
   /**
-   * 4.Get single column
+   * 2. dropdown
+   * Actions:
+   * 1.Assert default option is selected
+   * 2. Select by attribute ,text and index
+   * 3. Get a list options
+   *
    */
-  // let arr = [];
-  // for (let i = 0; i < rowCount; i++) {
-  //   let cellVal = await $(
-  //     `//table[@id='table1']/tbody/tr[${i + 1}]/td[4]`
-  //   ).getText();
-  //   arr.push(cellVal);
-  // }
-  // console.log(`>> Single col value: ${arr}`);
 
-  /**
-   * 5. Get single cell value based on another cell
-   */
+  //1.Assert default option is selected
+  let element = await $('//select/option[@selected="selected"]');
+  let val = await element.getText();
+  chai.expect(val).to.equal("Please select an option");
+  //await browser.debug();
+
+  //2. Select by attribute ,text and index
+  let ddEle = await $(".example #dropdown");
+  await ddEle.selectByIndex(2);
+
+  //3. Get a list options
+  let eleArr = await $$("select > option");
   let arr = [];
-  for (let i = 0; i < rowCount; i++) {
-    //for (let j = 0; j < colCount; j++) {
-    let price = await (
-      await $(`//table[@id='table1']/tbody/tr[${i + 1}]/td[4]`)
-    ).getText();
-    let firstname = await (
-      await $(`//table[@id='table1']/tbody/tr[${i + 1}]/td[2]`)
-    ).getText();
-    if (+price.replace("$", "") > 50) {
-      arr.push(firstname);
-    }
-    //}
+  for (let i = 0; i < eleArr.length; i++) {
+    const element = eleArr[i];
+    let val = await element.getText();
+    arr.push(val);
+    console.log(val);
   }
-  console.log(`>> Single col value: ${arr}`);
+  console.log(`>> Options array: ${arr}`);
+
+  await browser.pause(3000);
+  //await browser.debug();
 });
