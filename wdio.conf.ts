@@ -1,6 +1,6 @@
 import type { Options } from "@wdio/types";
 import dotenv from "dotenv";
-dotenv.config()
+dotenv.config();
 
 let headless = process.env.HEADLESS;
 let debug = process.env.DEBUG;
@@ -61,10 +61,10 @@ export const config: Options.Testrunner = {
     // 'path/to/excluded/files'
   ],
 
-  suites:{
-    demo:[
-      './test/features/webDriverZeroExpert/test2.feature',
-      './test/features/demo/Inventory.feature',
+  suites: {
+    demo: [
+      "./test/features/webDriverZeroExpert/test2.feature",
+      "./test/features/demo/Inventory.feature",
     ],
   },
   //
@@ -132,7 +132,7 @@ export const config: Options.Testrunner = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: debug.toUpperCase() === "Y" ? 'info' : 'error',
+  logLevel: debug.toUpperCase() === "Y" ? "info" : "error",
   //
   // Set specific log levels per logger
   // loggers:
@@ -195,7 +195,18 @@ export const config: Options.Testrunner = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ["spec"],
+  reporters: [
+    "spec",
+    // [
+    //   "allure",
+    //   {
+    //     outputDir: "allure-results",
+    //     disableWebdriverStepsReporting: true,
+    //     useCucumberStepReporter: true,
+    //     //disableWebdriverScreenshotsReporting: false,
+    //   }
+    // ]
+  ],
 
   //
   // If you are using Cucumber you need to specify the location of your step definitions.
@@ -322,8 +333,15 @@ export const config: Options.Testrunner = {
    * @param {number}             result.duration  duration of scenario in milliseconds
    * @param {Object}             context          Cucumber World object
    */
-  // afterStep: function (step, scenario, result, context) {
-  // },
+  afterStep: async function (step, scenario, result, context) {
+    console.log(`>> step : ${JSON.stringify(step)}`);
+    console.log(`>> scenario: ${JSON.stringify(scenario)}`);
+    console.log(`>> result: ${JSON.stringify(result)}`);
+
+    if (!result.passed) {
+      await browser.takeScreenshot();
+    }
+  },
   /**
    *
    * Runs after a Cucumber Scenario.

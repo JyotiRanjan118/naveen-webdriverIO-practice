@@ -1,6 +1,6 @@
 Feature: add command 
 
-    @demo
+    #@demo
     Scenario: Run add command
         Given contact us page is opened
         Then fill customer details and click on submit

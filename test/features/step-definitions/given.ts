@@ -11,7 +11,7 @@ Given(/^Login to inventory web app$/, async function () {
 
   //@ts-ignore
   await browser.url(browser.config.sauuceDemoURL);
-  console.log(`>> Test config values :${JSON.stringify(browser.config)}`);
+  // console.log(`>> Test config values :${JSON.stringify(browser.config)}`);
   
   await browser.maximizeWindow();
   await browser.setTimeout({ implicit: 15000, pageLoad: 10000 });
@@ -22,4 +22,7 @@ Given(/^Login to inventory web app$/, async function () {
   // await $(`#password`).setValue(process.env.TEST_STD_PASSWORD);
   await $(`#login-button`).click();
   await browser.pause(3000);
+
+  
+  this.appid = "ABC123"
 });

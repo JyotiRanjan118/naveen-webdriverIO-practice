@@ -1,7 +1,8 @@
 import { Then } from "@wdio/cucumber-framework";
 import chai from "chai";
 
-Then(/^Inventory page should list (.*)$/, async function (noOfProducts) {
+Then(/^Inventory page should (.*)\s?list (.*)$/, async function (negativecheck, noOfProducts) {
+  console.log(`>> The appid: ${this.appid}`);
   if (!noOfProducts) throw Error(`Invalid number provided: ${noOfProducts}`);
   let eleArr = await $$(`.inventory_item_name`);
   chai.expect(eleArr.length).to.equal(parseInt(noOfProducts));

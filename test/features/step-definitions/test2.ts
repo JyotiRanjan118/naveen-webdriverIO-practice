@@ -24,7 +24,7 @@ Then(/^fill customer details and click on submit$/, async () => {
         await lastName.setValue("Blogs");
         //await emailAddress.setValue("joe_blogs123@mail.com");
         await emailAddress.setValue(dataDenerator.generateRandomString()+"@gmail.com");      //Generate random string
-        await browser.pause(5000);
+        await browser.pause(1000);
         await message.setValue("Hello how are you?");
 
         //await browser.debug();
