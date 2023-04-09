@@ -2,7 +2,7 @@ import { Given, When, Then } from "@wdio/cucumber-framework";
 import chai from "chai"
 import dataDenerator from "../../../utils/data-denerator";
 const commands = require("../../../utils/commands");
-const DataGenerator = require("../../../utils/data-denerator")
+const DataGenerator = require("../../../utils/data-denerator");
 
 
 Given(/^contact us page is opened$/, async () => {

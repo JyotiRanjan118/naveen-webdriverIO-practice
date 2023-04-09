@@ -9,8 +9,7 @@
     "test:smoke": "Set DEBUG=N && HEADLESS=Y && npx wdio config/wdio.test.conf.ts --cucumberOpts.tagExpression='@smoke'",
     "uat:demo": "Set DEBUG=N && HEADLESS=N && npx wdio config/wdio.uat.conf.ts --cucumberOpts.tagExpression='@demo'",
     "uat:smoke": "Set DEBUG=N && HEADLESS=Y && npx wdio config/wdio.uat.conf.ts --cucumberOpts.tagExpression='@smoke'",
-    "smoke-suite": "npx wdio --suites wdio.conf.ts",
-    "webdriverIOZeroExpert": "npx wdio --spec test/features/webDriverZeroExpert/*.features"
+    "smoke-suite": "npx wdio config/wdio.test.conf.ts --suite smoke"
   },
   "author": "Jyoti Nath",
   "license": "ISC",
