@@ -66,11 +66,11 @@ export const config: Options.Testrunner = {
       "./test/features/webDriverZeroExpert/test2.feature",
       "./test/features/demo/Inventory.feature",
     ],
-    smoke:[
-      './test/features/demo/demo.feature',
-      './test/features/demo/Inventory.feature'
+    smoke: [
+      "./test/features/demo/demo.feature",
+      "./test/features/demo/Inventory.feature",
     ],
-    regression:[],
+    regression: [],
   },
   //
   // ============
@@ -180,7 +180,7 @@ export const config: Options.Testrunner = {
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
   services: ["chromedriver"],
-
+  
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
   // see also: https://webdriver.io/docs/frameworks
