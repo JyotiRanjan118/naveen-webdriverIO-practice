@@ -5,7 +5,7 @@ dotenv.config()
 
 Given(/^Login to inventory web app$/, async function () {
 
-  console.log(`Test username: ${process.env.TEST_USERNAME}`);
+  //console.log(`Test username: ${process.env.TEST_USERNAME}`);
 
   //await browser.url("https://www.saucedemo.com/");
 
