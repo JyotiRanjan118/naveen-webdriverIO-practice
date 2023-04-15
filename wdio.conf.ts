@@ -66,6 +66,11 @@ export const config: Options.Testrunner = {
       "./test/features/webDriverZeroExpert/test2.feature",
       "./test/features/demo/Inventory.feature",
     ],
+    smoke: [
+      "./test/features/demo/demo.feature",
+      "./test/features/demo/Inventory.feature",
+    ],
+    regression: [],
   },
   //
   // ============
@@ -108,7 +113,7 @@ export const config: Options.Testrunner = {
       browserName: "chrome",
       "goog:chromeOptions": {
         args:
-          headless.toUpperCase() === "Y"
+          headless?.toUpperCase() === "Y"
             ? [
                 "--disable-web-security",
                 "--headless",
@@ -132,7 +137,8 @@ export const config: Options.Testrunner = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: debug.toUpperCase() === "Y" ? "info" : "error",
+  logLevel: debug?.toUpperCase() === "Y" ? "info" : "error",
+  //logLevel: "info",
   //
   // Set specific log levels per logger
   // loggers:
@@ -174,7 +180,7 @@ export const config: Options.Testrunner = {
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
   services: ["chromedriver"],
-
+  
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
   // see also: https://webdriver.io/docs/frameworks
